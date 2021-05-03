@@ -19,7 +19,6 @@ describe("Quotes", () => {
 
   it("Get Random quote", async () => {
     const response = await request(app).get("/quotes/random");
-    console.log(response.body);
     expect(response.body.quote).not.toBeNull();
     expect(response.body.quote).toBeDefined();
   });

@@ -1,12 +1,9 @@
-const Quote = require("../models/Quote.model");
-const { randomNumber } = require("../utills");
+const QuoteService = require("../services/QuoteService");
 
 class QuoteController {
   async findByCharacterName(req, res) {
     try {
-      const quotes = await Quote.find({
-        character: { $regex: ".*" + req.params.name + ".*", $options: "i" },
-      });
+      const quotes = await QuoteService.findByCharacterName(req.params.name);
       res.json(quotes).status(200);
     } catch (error) {
       console.log(error);
@@ -18,9 +15,7 @@ class QuoteController {
 
   async getRandomQuote(req, res) {
     try {
-      const quotes = await Quote.find();
-      const number = randomNumber(0, quotes.length - 1);
-      const quote = quotes[number];
+      const quote = await QuoteService.findRandomQuote();
       res.status(200).send({ quote });
     } catch (error) {
       res.status(500).send({
