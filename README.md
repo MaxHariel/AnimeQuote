@@ -25,4 +25,4 @@ See application: http://localhost:3000 set PORT in .env to change default port
 Environment variables
 
 * PORT (optional on dev)
-* DB_URI_(Mongo connection)
+* DB_URI(MongoDB connection)
