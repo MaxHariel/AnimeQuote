@@ -1,5 +1,6 @@
 .env
 .env.test
 yarn.lock
+.vscode
 __tests__/coverage
 node_modules

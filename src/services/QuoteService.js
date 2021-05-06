@@ -2,10 +2,25 @@ const Quote = require("../models/Quote.model");
 const { randomNumber } = require("../utills");
 
 class QuoteService {
-  async findByCharacterName(name) {
-    const quotes = await Quote.find({
-      character: { $regex: ".*" + name + ".*", $options: "i" },
-    });
+  async findByName(name, page) {
+    const options = {
+      page,
+      limit: 2,
+    };
+
+    const quotes = await Quote.paginate(
+      {
+        $or: [
+          { character: { $regex: ".*" + name + ".*", $options: "i" } },
+          { anime: { $regex: ".*" + name + ".*", $options: "i" } },
+        ],
+      },
+      options,
+      function (err, result) {
+        if (err) throw new Error(err);
+        return result;
+      }
+    );
     return quotes;
   }
 

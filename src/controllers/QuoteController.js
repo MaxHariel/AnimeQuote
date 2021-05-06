@@ -1,9 +1,12 @@
 const QuoteService = require("../services/QuoteService");
 
 class QuoteController {
-  async findByCharacterName(req, res) {
+  async findByName(req, res) {
     try {
-      const quotes = await QuoteService.findByCharacterName(req.params.name);
+      const quotes = await QuoteService.findByName(
+        req.query.search,
+        req.query.page
+      );
       res.json(quotes).status(200);
     } catch (error) {
       console.log(error);
